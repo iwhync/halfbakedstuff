@@ -4,7 +4,6 @@ from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
 from chatterbot.trainers import ListTrainer
 import spacy
-from tkinter import *
 from chatterbot import *
 import random
 
@@ -40,12 +39,14 @@ while a == True:
             audio = r.listen(source)
         x = r.recognize_google(audio)
         print(f"you said {x}")
+        if x == "quit" or x == "end" or x == "goodbye":
+            a == False
+            break
         y = chatbot.get_response(x)
         print(f"chatbot said {y}")
         engine = pyttsx3.init()
         engine.say(y)
         engine.runAndWait()
-        a -= 1
         engine.stop()
     except:
         what = random.randint(1,3)
